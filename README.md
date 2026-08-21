@@ -1,12 +1,14 @@
 # HydroScholar AI Case-Study Artifact Archive
 
 <p align="center">
+  <img src="assets/usgs-logo.png" alt="U.S. Geological Survey logo" width="210">
+  &nbsp;&nbsp;&nbsp;
   <img src="assets/tulane-logo.png" alt="Tulane University logo" width="180">
 </p>
 
-**the Hydroinformatics Lab at Tulane University**
+**Hydroinformatics Lab at Tulane University**
 
-The USGS identifier is not bundled until written permission and approved artwork are confirmed. See the [USGS Visual Identity System guidance](https://www.usgs.gov/information-policies-and-instructions/usgs-visual-identity-system).
+The USGS identifier is included with permission using approved artwork. See the [USGS Visual Identity System guidance](https://www.usgs.gov/information-policies-and-instructions/usgs-visual-identity-system).
 
 This repository contains the five archived case-study artifacts associated with the HydroScholar AI manuscript. It is an artifact repository, not the HydroScholar AI software repository.
 
@@ -61,7 +63,7 @@ This repository intentionally does not distribute the HydroScholar AI applicatio
 
 ## Branding
 
-Before publication, add the approved USGS and Tulane University logo files and replace `[NEW LAB NAME TO BE CONFIRMED]` with the lab name approved by the authors and institutions. Do not add unofficial or modified institutional marks.
+The repository includes the approved USGS and supplied Tulane University logo files and uses the name **Hydroinformatics Lab at Tulane University**. Do not replace or modify the institutional marks without approval.
 
 ## Citation
 
