@@ -1,0 +1,134 @@
+experiment,path,status,bytes,sha256,reason
+CS-I_Willamette_River_14211720,design.md,included,2692,5f6c0c9a582f05ae99b5abf302c52b685196058f96ebef54f524e1c49732bbb6,
+CS-I_Willamette_River_14211720,experiment.py,excluded,491,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,experiment_plan.json,included,5045,7dbbc12e8a5de5dc35504a13d950174586e01f9b9a0cf894f3a872661ec26562,
+CS-I_Willamette_River_14211720,provenance.jsonl,included,13838,5bdaac65ff791446be46cafcdb6ab712af55ef52d44ae70745457acef67e1a05,
+CS-I_Willamette_River_14211720,research_paper.aux,excluded,1501,,non-artifact file type
+CS-I_Willamette_River_14211720,research_paper.log,included,24177,2c71bcca91212dc84c8ee3fde5b18af377979cc050c9e37eb56187b686a0f1b6,
+CS-I_Willamette_River_14211720,research_paper.out,excluded,1409,,non-artifact file type
+CS-I_Willamette_River_14211720,research_paper.pdf,included,174315,cd73e871341dffd8d4e270074cc3e6bad6a8a846a33cb5ae6ed891568b772fd9,
+CS-I_Willamette_River_14211720,research_paper.spl,excluded,0,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,research_paper.tex,included,17665,0b72bb943e4a11311312ffb9f9455377defb88f5c0c2a73e88968792a97eb546,
+CS-I_Willamette_River_14211720,data/clean_precip.csv,included,5889,4e5e7581c62c6796efc98d8099493a338dfe53f648d49b7e892c25db397fd13f,
+CS-I_Willamette_River_14211720,data/clean_streamflow.csv,included,7233,7dead799769ee4e0e467b4d70dff81814157d94265c804b38a0715bc8545680a,
+CS-I_Willamette_River_14211720,data/merged_hydro.csv,included,8736,5750b6b04583e208f2b3133fd9d026ad000df110f5eeed5013f420ce91565462,
+CS-I_Willamette_River_14211720,data/raw_precip.csv,included,5889,4e5e7581c62c6796efc98d8099493a338dfe53f648d49b7e892c25db397fd13f,
+CS-I_Willamette_River_14211720,data/raw_streamflow.csv,included,7233,7dead799769ee4e0e467b4d70dff81814157d94265c804b38a0715bc8545680a,
+CS-I_Willamette_River_14211720,plots/scatter.png,included,268904,31a2f01593483598ee20c8309ba82e6b83d6ab11895c008ce570f0bb5c373369,
+CS-I_Willamette_River_14211720,plots/time_series.png,included,324034,b4ebece2390b35fd8b571e7eeceac6f9070aaae8b8572f3aac9363f80d08a69d,
+CS-I_Willamette_River_14211720,results/corr_metrics.json,included,295,3d5d5905d99d40d01dc3422a0309cf27f5c6981f9e94a08da67d61d6f2355459,
+CS-I_Willamette_River_14211720,scripts/calc_correlation.py,excluded,1874,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,scripts/clean_precip.py,excluded,486,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,scripts/clean_streamflow.py,excluded,393,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,scripts/fetch_precip.py,excluded,1925,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,scripts/fetch_streamflow.py,excluded,2737,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,scripts/merge_data.py,excluded,464,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-I_Willamette_River_14211720,scripts/plot_correlation.py,excluded,4331,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,01_fetch_usgs_data.py,excluded,1558,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,02_clean_and_pivot.py,excluded,899,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,03_feature_engineering.py,excluded,959,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,04_train_rf_model.py,excluded,1653,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,05_evaluate_model.py,excluded,2421,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,experiment.py,excluded,491,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,experiment_plan.json,included,6205,84d58c251cd38eacb98fd129639df4de7d69a4aeb97338b8976831029167516f,
+CS-II_St_John_River_Random_Forest,manifest.json,included,919,da327c1f60d4e8281864d07f84dc13d9e5082f88b13e7ae09b2f56d9dda4c503,
+CS-II_St_John_River_Random_Forest,provenance.jsonl,included,4058221,95c746939437997038d64f94d8c2c3fdf0ced1154e59957713200fb37b48521b,
+CS-II_St_John_River_Random_Forest,requirements.txt,included,58,fb5c004023e715ad0cbc2333406b8c29d46700445d1daca2de61e5e1473f441f,
+CS-II_St_John_River_Random_Forest,research_paper.aux,excluded,837,,non-artifact file type
+CS-II_St_John_River_Random_Forest,research_paper.log,included,23956,02fcda0f58c6629aa0f873bc19213f5b8accf9e05304f30595781b1548e6bca6,
+CS-II_St_John_River_Random_Forest,research_paper.out,excluded,445,,non-artifact file type
+CS-II_St_John_River_Random_Forest,research_paper.pdf,included,118452,87252d1ef4435108558a93ca18a9021a85b1ab90e67c3304b3bca09e67447fe9,
+CS-II_St_John_River_Random_Forest,research_paper.spl,excluded,0,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-II_St_John_River_Random_Forest,research_paper.tex,included,15816,a2f9b6a4f4e3ff2376d4417fe7803f60be790e2f6f664d4d79f2c17cbb9e192c,
+CS-II_St_John_River_Random_Forest,data/clean_pivoted_flow.csv,included,56545,9a64d14d88af87e056240ec0cc121b3f3abf44661b8dfb2e3e37f38f2f94d00f,
+CS-II_St_John_River_Random_Forest,data/ml_ready_features.csv,included,99639,8c4761c101ee5c700e02e8ddba1c7d5a8cc93c8103296e346facef565472ff74,
+CS-II_St_John_River_Random_Forest,data/raw_usgs_streamflow.csv,included,179291,80cf6882f976f717b0f76cfa326b7377a00a5b998eeecebf49b1010c0c2a66bb,
+CS-II_St_John_River_Random_Forest,outputs/Final_Report.md,included,1653,61643a65f9ed3c2d373ff9e8370ac9009660bceef961c2bf9e228a831acf5309,
+CS-II_St_John_River_Random_Forest,outputs/hydrograph_eval.png,included,83570,c8d689c1f0c6773207489f4cbdaf141e3fabd1084ba6802e96f7184b96a8d05d,
+CS-II_St_John_River_Random_Forest,outputs/metrics.txt,included,30,48d5f29a87598096153772a4f2e06d9a1cc01142d95d0f20192c3a2db826ffbd,
+CS-II_St_John_River_Random_Forest,outputs/rf_model.pkl,excluded,15783665,,non-artifact file type
+CS-II_St_John_River_Random_Forest,outputs/test_predictions.csv,included,11738,50f0bb7e93490d9e5685c49c3b84356dfe4e8dc46ec689a6111c26592606497e,
+CS-III_Lake_Oroville_Satellite_Monitoring,01_acquire_sentinel_stac.py,excluded,5389,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-III_Lake_Oroville_Satellite_Monitoring,02_acquire_gauge_data.py,excluded,3322,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-III_Lake_Oroville_Satellite_Monitoring,03_compute_ndwi.py,excluded,2417,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-III_Lake_Oroville_Satellite_Monitoring,04_evaluate_correlation.py,excluded,2999,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-III_Lake_Oroville_Satellite_Monitoring,experiment.py,excluded,491,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-III_Lake_Oroville_Satellite_Monitoring,experiment_plan.json,included,4046,47b1655734608a1ffc1423b3cf3b5fcca9e465f1110df30ef6f3f281c92bcce2,
+CS-III_Lake_Oroville_Satellite_Monitoring,manifest.json,included,2794,e89032fa79afaf12c0976057b5f8f80f526e71190a54126c9387d028b58b03ae,
+CS-III_Lake_Oroville_Satellite_Monitoring,provenance.jsonl,included,2079261,26dc4fbac20da8953f45048e973b59a4dc0b521a6cd1f81a12a3f3e0163592a3,
+CS-III_Lake_Oroville_Satellite_Monitoring,research_paper.aux,excluded,2497,,non-artifact file type
+CS-III_Lake_Oroville_Satellite_Monitoring,research_paper.log,included,24508,a22c45fdcf1b3fad7b7ab1334f532801dd96c82b6145d98334c55f91c5849b88,
+CS-III_Lake_Oroville_Satellite_Monitoring,research_paper.out,excluded,2586,,non-artifact file type
+CS-III_Lake_Oroville_Satellite_Monitoring,research_paper.pdf,included,246166,53bee972a83545fb968b5b32d937bfa26440a0dc8b526b76ae18539b7c16b377,
+CS-III_Lake_Oroville_Satellite_Monitoring,research_paper.spl,excluded,0,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-III_Lake_Oroville_Satellite_Monitoring,research_paper.tex,included,16954,4bdbd8c36ac2d17b59814f8a8bc1268269a75e7d727e10422291dfdf4d2499a1,
+CS-III_Lake_Oroville_Satellite_Monitoring,data/correlation_plot.png,included,31483,cf2d3432ffe28d046e858b17de0350d314b426d732237616fc7495fe2bb4e7fa,
+CS-III_Lake_Oroville_Satellite_Monitoring,data/final_report.json,included,199,09afe846e1e8dcd4eb7c136616f2201b6269fcdacbccdb3d9e23963471e4e0ea,
+CS-III_Lake_Oroville_Satellite_Monitoring,data/gauge_levels.csv,included,4497,5d690c2919f0532381ff51d3bd3e01f5d61dc37f7e1a998237ac95cb1d5ede23,
+CS-III_Lake_Oroville_Satellite_Monitoring,data/processed_inventory.csv,included,688,df8c5acb32886fe9922d729f8213d41468bcbc9502b315bfb2688e945c870abe,
+CS-III_Lake_Oroville_Satellite_Monitoring,data/satellite_inventory.csv,included,605,22e5308dfd92657c7c10024a4fd935b8202e371b59f5ccda1fab83157d734368,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,00_install_requirements.py,excluded,218,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,00_install_requirements.sh,excluded,507,,non-artifact file type
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,01_acquire_discharge.py,excluded,1831,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,02_acquire_precipitation.py,excluded,3988,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,03_clean_and_align.py,excluded,1473,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,04_define_lstm_model.py,excluded,486,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,05_train_lstm.py,excluded,2681,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,06_evaluate_lstm.py,excluded,1108,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,07_define_lstm_log_model.py,excluded,650,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,08_train_lstm_log.py,excluded,2965,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,09_evaluate_lstm_log.py,excluded,1218,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,experiment.py,excluded,491,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,experiment_plan.json,included,8164,e2d3e701183b3d2cf247da678c5048eb5c66dd4c26263f6e09bd4dd191b09526,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,manifest.json,included,514,c52553aea753a6853e6f404ba4b9ed53aca71b4f72bf806cfa2dddb24265904b,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,provenance.jsonl,included,3991813,eeded233d5561714a34f2be0c05e6eed76886906b202c351bfb89ba7f35bc97c,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,research_paper.aux,excluded,2836,,non-artifact file type
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,research_paper.log,included,25176,32bb2252f0ba254d110a9ba1e074d227d0895f5253d672168dcc6dcebc6dd805,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,research_paper.out,excluded,2166,,non-artifact file type
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,research_paper.pdf,included,590345,536469f247fd964801cd20ecb54cb0216d5056ed7b56d5cc846f1094a4e4b415,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,research_paper.spl,excluded,0,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,research_paper.tex,included,19463,8c6d464869108b527d59cf6eea6fe50676e202d5f5844e0e0e59b8abd5ca3a59,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,models/lstm_log_model_arch.json,included,3113,bff049bb1e5179950f77f29f686b465d773ca362a186d2d3e173ea4489e28c89,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,models/lstm_log_model_weights.weights.h5,excluded,73944,,non-artifact file type
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,models/lstm_model_arch.json,included,3109,c31859f8c0f833ac1e027266a0e8501b10a5ddea514cd8c13fd4a3d9a3da11f5,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,models/lstm_model_weights.weights.h5,excluded,73944,,non-artifact file type
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,outputs/log_metrics.json,included,67,489863c1a9bddf91789ae0b7ca348459abfe75d33053eb417db48264761fb4ee,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,outputs/metrics.json,included,68,e622be37c6311e4d0e711e4e3f462143267b60ef5b57d413cf756e1c85e24a29,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,outputs/plot_initial.png,included,66967,5d38b48a9b67e83c5bd5851243c7bf8899359cd755b950645af414a7b79f6630,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,outputs/plot_log.png,included,319965,7629a483b53da357b42d3f2a58aff2309dee0ce1d497dc1cdb1f11755fdc4ccf,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,outputs/test_predictions.csv,included,10215,fd4093b26a610bd98683de5189c388dd33c54b83f48e1d696013c52960c00619,
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,outputs/test_predictions_log.csv,included,14548,853b1d354ef9d8e045f3192e8da213b327ef8167814513bb7b2a10e403b6e361,
+CS-V_ERA5_Columbia_River_Basin,01_download_era5_jan1980.py,excluded,1826,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,02_download_basin_boundary.py,excluded,1454,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,03_aggregate_daily.py,excluded,5081,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,04_inspect_file_header.py,excluded,1229,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,04_reproject_to_epsg32611.py,excluded,3307,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,05_kriging_prototype.py,excluded,4481,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,05_visualize_reprojected_precip.py,excluded,2049,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,06_plot_comparison.py,excluded,3299,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,07_download_era5_full.py,excluded,1943,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,07_full_pipeline_design.md,included,3497,09994fc139a2193f8ddf99bb337c548f3c70557c09fe57a562c606874ea21601,
+CS-V_ERA5_Columbia_River_Basin,08_aggregate_reproject_full.py,excluded,6312,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,09_kriging_full.py,excluded,6947,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,README_design.md,included,3450,1de925ca8b8298be8f4534b4d0c22f87d0d466cb9c2fafa3bf37657726ab3f01,
+CS-V_ERA5_Columbia_River_Basin,experiment.py,excluded,491,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,experiment_plan.json,included,8826,0a721fbdb476dbee3e185fbe17a3359b093125e1334043325f23b801b2fa50cc,
+CS-V_ERA5_Columbia_River_Basin,global_audit_trace.jsonl,included,2238103,1d9c216a1170d815b32cd8a43063608dd2d74fae4f2771361081868b64b90a28,
+CS-V_ERA5_Columbia_River_Basin,manifest.json,included,1320,0df4907553f22a6396b020af9ef85757eafb20e0dee36f7c86a5bd2f39c67f68,
+CS-V_ERA5_Columbia_River_Basin,provenance.jsonl,included,5141452,335e083e6fabfe6f8f61ca3a3b26fd6117dfd6edfef0377350c5c6e62505d7c5,
+CS-V_ERA5_Columbia_River_Basin,data/columbia_basin.geojson,included,350,31ff97274d8f69badf86a536b3a199d02664c8b9b4d61d71d448d49dca386921,
+CS-V_ERA5_Columbia_River_Basin,data/columbia_basin_32611.geojson,included,527,6e6434d7b589eb4ea8c6b19b83232782466e7e356bd518f34a8973f9e69b8f9e,
+CS-V_ERA5_Columbia_River_Basin,data/era5_2021_daily_32611.nc,excluded,1270778,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_2021_hourly.nc,excluded,28200700,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_2022_daily_32611.nc,excluded,1267656,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_2022_hourly.nc,excluded,29532873,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_2023_daily_32611.nc,excluded,1282388,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_2023_hourly.nc,excluded,29886241,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_jan1980_daily.nc,excluded,279140,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_jan1980_daily_32611.nc,excluded,285066,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,data/era5_jan1980_hourly.nc,excluded,2148045,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,figures/comparison_pr_19800101.png,included,382999,66a35c55acfe291e87f58d41ee2aef4478ded2d734dcd012b565de6d76514fda,
+CS-V_ERA5_Columbia_River_Basin,figures/comparison_t2m_19800101.png,included,475606,a361c5797a04346c1e91011016c7b4e627e341198e5c9c4cebf860cafa93d91e,
+CS-V_ERA5_Columbia_River_Basin,outputs/era5_19800101_pr_1km.nc,excluded,4576446,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,outputs/era5_19800101_t2m_1km.nc,excluded,4576446,,"HydroScholar source, executable, credential, cache, or large scientific-binary file"
+CS-V_ERA5_Columbia_River_Basin,plots/precip_jan1_1980.png,included,132016,777ea40d3bc7f3f80128a33ed6082f8d32a68824753ac39f158f64ed20c33de3,

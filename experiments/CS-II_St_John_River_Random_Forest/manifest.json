@@ -1,0 +1,28 @@
+{
+  "ACQ_1": [
+    {
+      "path": "data/raw_usgs_streamflow.csv",
+      "type": "CSV",
+      "description": "Parsed daily streamflow records from USGS for two sites (01010000 and 01014000) spanning 2015-01-01 to 2020-12-31."
+    }
+  ],
+  "ENG_2": [
+    {
+      "path": "data/ml_ready_features.csv",
+      "type": "CSV",
+      "description": "ML-ready dataset including the original upstream flow and its lagged values for the previous 1, 2, and 3 days"
+    }
+  ],
+  "EXEC_1": [
+    {
+      "path": "outputs/rf_model.pkl",
+      "type": "Model",
+      "description": "Pickled Random Forest regressor trained to predict downstream flow from upstream measurements and their lags."
+    },
+    {
+      "path": "outputs/test_predictions.csv",
+      "type": "CSV",
+      "description": "CSV file containing actual vs. predicted downstream flow values for the test set, indexed by date."
+    }
+  ]
+}

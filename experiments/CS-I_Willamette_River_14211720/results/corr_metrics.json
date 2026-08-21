@@ -1,0 +1,12 @@
+{
+    "pearson": {
+        "correlation": 0.2110758742726201,
+        "p_value": 4.810391803430114e-05
+    },
+    "spearman": {
+        "correlation": 0.24772767789943745,
+        "p_value": 1.6554977430967998e-06
+    },
+    "x_column": "precip_mm",
+    "y_column": "streamflow_cfs"
+}

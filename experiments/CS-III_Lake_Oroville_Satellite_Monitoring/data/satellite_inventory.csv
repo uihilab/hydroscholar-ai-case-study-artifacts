@@ -1,0 +1,6 @@
+date,red_path,nir_path,green_path
+2023-01-24,data\satellite\2023-01-24_B04.tif,data\satellite\2023-01-24_B08.tif,data\satellite\2023-01-24_B03.tif
+2023-02-13,data\satellite\2023-02-13_B04.tif,data\satellite\2023-02-13_B08.tif,data\satellite\2023-02-13_B03.tif
+2023-03-15,data\satellite\2023-03-15_B04.tif,data\satellite\2023-03-15_B08.tif,data\satellite\2023-03-15_B03.tif
+2023-04-09,data\satellite\2023-04-09_B04.tif,data\satellite\2023-04-09_B08.tif,data\satellite\2023-04-09_B03.tif
+2023-05-19,data\satellite\2023-05-19_B04.tif,data\satellite\2023-05-19_B08.tif,data\satellite\2023-05-19_B03.tif

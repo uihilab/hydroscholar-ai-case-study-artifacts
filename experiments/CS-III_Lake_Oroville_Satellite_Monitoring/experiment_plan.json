@@ -1,0 +1,87 @@
+{
+  "project": "Reservoir_Sentinel_Monitoring",
+  "workflow": {
+    "INFRA_SAT": {
+      "code": "INFRA",
+      "category_name": "Infrastructure",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Install geospatial libraries: `pip install pystac-client planetary-computer rasterio geopandas matplotlib scikit-image`. These are required for accessing Microsoft Planetary Computer and processing GeoTIFFs.",
+      "completion_criteria": [
+        "rasterio and pystac installed"
+      ]
+    },
+    "ACQ_STAC": {
+      "code": "ACQ",
+      "category_name": "Satellite Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INFRA_SAT"
+      ],
+      "details": "Use `pystac_client` to search the Microsoft Planetary Computer for 'sentinel-2-l2a'. Bounding Box: [-121.15, 39.50, -121.05, 39.60] (Lake Oroville, CA). Date Range: '2023-01-01' to '2023-06-01'. Filter for cloud cover < 10%. Select the least cloudy image per month. Download the Red (B04) and NIR (B08) bands for these images. Save them to 'data/satellite/'. Save a metadata CSV 'data/satellite_inventory.csv' with columns: date, red_path, nir_path.",
+      "completion_criteria": [
+        "data/satellite/ contains .tif files",
+        "inventory csv exists"
+      ]
+    },
+    "ACQ_GAUGE": {
+      "code": "ACQ",
+      "category_name": "Gauge Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INFRA_SAT"
+      ],
+      "details": "Use `dataretrieval` (USGS) to fetch daily mean Gauge Height (00065) for Site '11406800' (Lake Oroville) for the same date range (2023-01-01 to 2023-06-01). Clean data and save to 'data/gauge_levels.csv'.",
+      "completion_criteria": [
+        "data/gauge_levels.csv exists"
+      ]
+    },
+    "ENG_NDWI": {
+      "code": "ENG",
+      "category_name": "Image Processing",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ACQ_STAC"
+      ],
+      "details": "Load 'data/satellite_inventory.csv'. For each row: 1. Load Red and NIR bands using `rasterio`. 2. Calculate NDWI = (Green - NIR) / (Green + NIR). Note: Use B03 (Green) if available, or modification using Red/NIR. Let's use NDWI = (B03 - B08)/(B03 + B08). Wait, simpler: Use **NDWI** formula. Calculate Surface Water Area (pixels where NDWI > 0.1). Convert pixel count to Square Kilometers (Sentinel-2 is 10m resolution, so 1 pixel = 100m^2). Append the calculated 'surface_area_sqkm' to the CSV. Save updated inventory as 'data/processed_inventory.csv'.",
+      "completion_criteria": [
+        "data/processed_inventory.csv has surface_area_sqkm column"
+      ]
+    },
+    "INSP_VISUAL": {
+      "code": "INSP",
+      "category_name": "Visual Verification",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_NDWI"
+      ],
+      "details": "Generate a plot for the first processed image. Subplot 1: True Color (RGB). Subplot 2: The calculated NDWI mask. Save as 'data/mask_verification.png'. User must verify if the water mask looks like the lake and not clouds.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Look at 'data/mask_verification.png'. Does the binary mask accurately outline the lake?"
+      },
+      "cyclic_routing": {
+        "condition": "Is the mask accurate?",
+        "if_true": [
+          "EVAL_CORR"
+        ],
+        "if_false": [
+          "ENG_NDWI"
+        ]
+      }
+    },
+    "EVAL_CORR": {
+      "code": "EVAL",
+      "category_name": "Correlation Analysis",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_VISUAL",
+        "ACQ_GAUGE"
+      ],
+      "details": "Load 'data/processed_inventory.csv' and 'data/gauge_levels.csv'. Merge on nearest date. Calculate Pearson correlation between 'surface_area_sqkm' and '00065_Mean'. Plot a regression line. If correlation < 0.8, flag as 'Low Confidence'. Save results to 'data/final_report.json'.",
+      "completion_criteria": [
+        "data/final_report.json exists"
+      ]
+    }
+  }
+}

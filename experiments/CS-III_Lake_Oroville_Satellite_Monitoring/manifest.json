@@ -1,0 +1,73 @@
+{
+  "ACQ_STAC": [
+    {
+      "path": "data/satellite_inventory.csv",
+      "type": "CSV",
+      "description": "A table listing the acquisition date and file paths for each downloaded Red (B04) and NIR (B08) band."
+    },
+    {
+      "path": "data/satellite/2023-01-24_B04.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Red band (B04) for January 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-01-24_B08.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Near-Infrared band (B08) for January 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-02-13_B04.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Red band (B04) for February 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-02-13_B08.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Near-Infrared band (B08) for February 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-03-15_B04.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Red band (B04) for March 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-03-15_B08.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Near-Infrared band (B08) for March 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-04-09_B04.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Red band (B04) for April 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-04-09_B08.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Near-Infrared band (B08) for April 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-05-19_B04.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Red band (B04) for May 2023 over the Lake Oroville bounding box."
+    },
+    {
+      "path": "data/satellite/2023-05-19_B08.tif",
+      "type": "Raster",
+      "description": "Sentinel-2 Near-Infrared band (B08) for May 2023 over the Lake Oroville bounding box."
+    }
+  ],
+  "ACQ_GAUGE": [
+    {
+      "path": "data/gauge_levels.csv",
+      "type": "CSV",
+      "description": "Cleaned daily mean discharge (cubic feet per second) for USGS site 11407000 (Feather River at Oroville, CA) from 2022-10-01 to 2023-06-01."
+    }
+  ],
+  "ENG_NDWI": [
+    {
+      "path": "data/processed_inventory.csv",
+      "type": "CSV",
+      "description": "Updated satellite inventory with a new column 'surface_area_sqkm' that reports the estimated surface water area (in square kilometers) derived from the NDWI calculation."
+    }
+  ]
+}

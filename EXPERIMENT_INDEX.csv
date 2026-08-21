@@ -1,0 +1,6 @@
+experiment,source_archive,included_files,included_bytes,excluded_files
+CS-I_Willamette_River_14211720,C:\Users\Varun\PhD-Materials\Softwares\hydroscholar-ai-advanced-v2-archive-files\archive\hydro_experiments\20260222_230416_willamette_river_14211720_corr,14,865945,11
+CS-II_St_John_River_Random_Forest,C:\Users\Varun\PhD-Materials\Softwares\hydroscholar-ai-advanced-version-2-archive\hydro_experiments\20260223_154300_usgs_streamflow_ml_predictor_done,14,4656093,10
+CS-III_Lake_Oroville_Satellite_Monitoring,C:\Users\Varun\PhD-Materials\Softwares\hydroscholar-ai-advanced-version-2-archive\hydro_experiments\20260305_204400_reservoir_sentinel_monitoring_done,11,2411201,8
+CS-IV_Onion_Creek_LSTM_Rainfall_Runoff,C:\Users\Varun\PhD-Materials\Softwares\hydroscholar-ai-advanced-version-2-archive\hydro_experiments\20260226_010616_onion_creek_flashiness_analysi_done,14,5053527,17
+CS-V_ERA5_Columbia_River_Basin,C:\Users\Varun\PhD-Materials\Softwares\hydroscholar-ai-advanced-version-2-archive\hydro_experiments\20260306_090216_high_resolution_spatial_downsc_done,11,8388146,23

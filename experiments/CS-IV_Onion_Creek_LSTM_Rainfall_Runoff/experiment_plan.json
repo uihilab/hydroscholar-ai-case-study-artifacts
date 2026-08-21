@@ -1,0 +1,145 @@
+{
+  "project": "Onion Creek Flashiness Analysis",
+  "workflow": {
+    "DSGN_1": {
+      "code": "DSGN",
+      "category_name": "Methodological Design",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Outline the modeling methodology: use daily time series of precipitation to predict daily stream discharge at USGS station 08158000 for 2015-01-01 to 2020-12-31 using a sequence-to-one LSTM. Use a sliding window of past 7 days of precipitation as input. Split data into train (2015-01-01 to 2018-12-31), validation (2019-01-01 to 2019-12-31), and test (2020-01-01 to 2020-12-31). Evaluate performance with Nash\u2013Sutcliffe Efficiency (NSE) and RMSE."
+    },
+    "INFRA_1": {
+      "code": "INFRA",
+      "category_name": "Infrastructure",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Write a shell script named `00_install_requirements.sh`. In it, install required Python packages using pip: numpy, pandas, requests, tensorflow, scikit-learn, hydrostats. Example:\n```bash\npip install numpy pandas requests tensorflow scikit-learn hydrostats\n```"
+    },
+    "ACQ_1_Discharge": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DSGN_1",
+        "INFRA_1"
+      ],
+      "details": "Write a script named `01_acquire_discharge.py`. Use the USGS Water Services API to fetch daily discharge (parameter code 00060) for site '08158000' from 2015-01-01 to 2020-12-31. Parse the output into a pandas DataFrame with columns ['date', 'discharge_cfs'] and save to `data/raw/discharge.csv`."
+    },
+    "ACQ_2_Precipitation": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DSGN_1",
+        "INFRA_1"
+      ],
+      "details": "Write a script named `02_acquire_precipitation.py`. Use the NOAA NCEI API (token provided in the 'NOAA_TOKEN' environment variable) to fetch daily precipitation for a representative station in the Onion Creek watershed between 2015-01-01 and 2020-12-31. Extract date and precipitation (mm) into a pandas DataFrame with columns ['date', 'precipitation_mm'] and save to `data/raw/precip.csv`."
+    },
+    "ENG_1_AlignData": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ACQ_1_Discharge",
+        "ACQ_2_Precipitation"
+      ],
+      "details": "Write a script named `03_clean_and_align.py`. Load `data/raw/discharge.csv` and `data/raw/precip.csv`. Parse 'date' as datetime. Create a continuous daily date index from 2015-01-01 to 2020-12-31. Merge on date, and fill or linearly interpolate any missing discharge and precipitation values. Save the cleaned and aligned dataset to `data/clean/cleaned_data.csv` with columns ['date', 'precipitation_mm', 'discharge_cfs']."
+    },
+    "INSP_1_DataQuality": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_1_AlignData"
+      ],
+      "details": "Human reviews the cleaned and aligned dataset summary: check for missing dates, NaN values, and reasonable ranges of precipitation and discharge.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Review `data/clean/cleaned_data.csv`. Are dates continuous? Are there any NaNs or outliers? If the data looks correct, approve; otherwise, reject and revisit the cleaning step."
+      },
+      "cyclic_routing": {
+        "condition": "Did the user approve the cleaned data?",
+        "if_true": [
+          "DEV_1_DefineLSTM"
+        ],
+        "if_false": [
+          "ENG_1_AlignData"
+        ]
+      }
+    },
+    "DEV_1_DefineLSTM": {
+      "code": "DEV",
+      "category_name": "Model Development",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_1_DataQuality"
+      ],
+      "details": "Write a script named `04_define_lstm_model.py`. Define a TensorFlow Keras LSTM model that takes input shape (window_size=7, features=1) and outputs a single discharge prediction. Compile the model with optimizer='adam' and loss='mean_squared_error'. Save the model architecture to `models/lstm_model_arch.json`."
+    },
+    "EXEC_1_TrainLSTM": {
+      "code": "EXEC",
+      "category_name": "Execution",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DEV_1_DefineLSTM"
+      ],
+      "details": "Write a script named `05_train_lstm.py`. Load `data/clean/cleaned_data.csv`, generate input sequences of the past 7 days precipitation to predict next-day discharge. Split into train (2015\u20132018), validation (2019), and test (2020). Load the model architecture from `models/lstm_model_arch.json`, train for 50 epochs with batch_size=32, and monitor validation loss. Save the trained weights to `models/lstm_model_weights.h5`, and write test set predictions to `outputs/test_predictions.csv` with columns ['date', 'true_discharge_cfs', 'predicted_discharge_cfs']."
+    },
+    "EVAL_1_Initial": {
+      "code": "EVAL",
+      "category_name": "Evaluation",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EXEC_1_TrainLSTM"
+      ],
+      "details": "Write a script named `06_evaluate_lstm.py`. Load `outputs/test_predictions.csv`, compute Nash\u2013Sutcliffe Efficiency (NSE) and RMSE between true_discharge_cfs and predicted_discharge_cfs using hydrostats. Save metrics to `outputs/metrics.json` and generate a plot of true vs predicted discharge time series saved to `outputs/plot_initial.png`."
+    },
+    "INSP_2_CheckNSE": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EVAL_1_Initial"
+      ],
+      "details": "Human reviews the NSE from `outputs/metrics.json` and decides whether it meets the threshold (NSE \u2265 0.6) or if a log-transform retraining is required.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Review the NSE value in `outputs/metrics.json`. Is NSE \u2265 0.6?"
+      },
+      "cyclic_routing": {
+        "condition": "Is NSE \u2265 0.6?",
+        "if_true": [],
+        "if_false": [
+          "DEV_2_DefineLogModel"
+        ]
+      }
+    },
+    "DEV_2_DefineLogModel": {
+      "code": "DEV",
+      "category_name": "Model Development",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_2_CheckNSE"
+      ],
+      "details": "Write a script named `07_define_lstm_log_model.py`. Define a TensorFlow Keras LSTM model identical in architecture to the original but to predict log-transformed discharge. Compile with optimizer='adam' and loss='mean_squared_error'. Save the model architecture to `models/lstm_log_model_arch.json`."
+    },
+    "EXEC_2_TrainLogLSTM": {
+      "code": "EXEC",
+      "category_name": "Execution",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DEV_2_DefineLogModel"
+      ],
+      "details": "Write a script named `08_train_lstm_log.py`. Load `data/clean/cleaned_data.csv` and apply natural log to `discharge_cfs` (add 0.1 to avoid log(0)). Generate 7-day precipitation input sequences to predict log-discharge. Split data as before. Load model architecture from `models/lstm_log_model_arch.json`, train for 50 epochs with batch_size=32. Save weights to `models/lstm_log_model_weights.h5` and write test predictions (log-space) to `outputs/test_predictions_log.csv` with columns ['date', 'true_log_discharge', 'predicted_log_discharge']."
+    },
+    "EVAL_2_LogEval": {
+      "code": "EVAL",
+      "category_name": "Evaluation",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EXEC_2_TrainLogLSTM"
+      ],
+      "details": "Write a script named `09_evaluate_lstm_log.py`. Load `outputs/test_predictions_log.csv`, exponentiate both true and predicted log-discharge back to original units, then compute NSE and RMSE using hydrostats. Save metrics to `outputs/log_metrics.json` and generate a plot of true vs predicted discharge saved to `outputs/plot_log.png`."
+    }
+  }
+}

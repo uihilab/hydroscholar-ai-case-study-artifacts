@@ -1,0 +1,35 @@
+{
+  "ACQ_ERA5_Jan1980": [
+    {
+      "path": "data/era5_jan1980_hourly.nc",
+      "type": "NetCDF",
+      "description": "ERA5 hourly total precipitation and 2 m temperature for January 1980 over the Columbia River Basin."
+    }
+  ],
+  "ENG_Aggregate_Daily": [
+    {
+      "path": "data/era5_jan1980_daily.nc",
+      "type": "NetCDF",
+      "description": "Daily-aggregated NetCDF file containing total precipitation (tp) as daily sums and 2 m temperature (t2m) as daily means for January 1980."
+    }
+  ],
+  "INSP_Prototype_Data": [
+    {
+      "path": "plots/precip_jan1_1980.png",
+      "type": "Plot",
+      "description": "Map showing the spatial distribution of daily precipitation on January 1, 1980 clipped to the Columbia basin boundary, in EPSG:32611 projection."
+    }
+  ],
+  "EVAL_Plot_Comparison_Prototype": [
+    {
+      "path": "figures/comparison_pr_19800101.png",
+      "type": "Plot",
+      "description": "Side-by-side map of ERA5 31 km vs. kriged 1 km precipitation for January 1, 1980, with basin boundary overlay."
+    },
+    {
+      "path": "figures/comparison_t2m_19800101.png",
+      "type": "Plot",
+      "description": "Side-by-side map of ERA5 31 km vs. kriged 1 km near-surface air temperature for January 1, 1980, with basin boundary overlay."
+    }
+  ]
+}

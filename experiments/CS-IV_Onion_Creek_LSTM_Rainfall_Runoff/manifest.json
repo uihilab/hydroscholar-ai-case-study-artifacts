@@ -1,0 +1,17 @@
+{
+  "INFRA_1": [],
+  "ACQ_1_Discharge": [
+    {
+      "path": "data/raw/discharge.csv",
+      "type": "CSV",
+      "description": "Daily streamflow (discharge in cubic feet per second) for USGS site 08158000 from 2015-01-01 to 2020-12-31."
+    }
+  ],
+  "ENG_1_AlignData": [
+    {
+      "path": "data/clean/cleaned_data.csv",
+      "type": "CSV",
+      "description": "Cleaned and aligned daily time series of precipitation (mm) and stream discharge (cfs) from 2015-01-01 to 2020-12-31."
+    }
+  ]
+}

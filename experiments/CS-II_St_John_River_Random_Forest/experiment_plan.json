@@ -1,0 +1,128 @@
+{
+  "project": "USGS_Streamflow_ML_Predictor",
+  "workflow": {
+    "DSGN_1": {
+      "code": "DSGN",
+      "category_name": "Methodological Design",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Study Objective: Build a predictive Machine Learning model (Random Forest) to forecast daily discharge at a downstream USGS gauge (01014000) using lagged daily discharge data from an upstream USGS gauge (01010000) on the St. John River, Maine. The study spans from 2015-01-01 to 2020-12-31."
+    },
+    "INFRA_1": {
+      "code": "INFRA",
+      "category_name": "Infrastructure & Ops",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DSGN_1"
+      ],
+      "details": "Create a requirements.txt file and install necessary Python packages: pandas, numpy, requests, scikit-learn, matplotlib, seaborn. These are required for API fetching, data engineering, and model training."
+    },
+    "ACQ_1": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INFRA_1"
+      ],
+      "details": "Write a script named `01_fetch_usgs_data.py`. Use the `requests` library to call the USGS Water Services REST API (https://waterservices.usgs.gov/nwis/dv/?format=json&sites=01010000,01014000&startDT=2015-01-01&endDT=2020-12-31&parameterCd=00060). Parse the JSON response to extract the Date, Site code, and Discharge value (cfs). Save the raw parsed data to `data/raw_usgs_streamflow.csv`."
+    },
+    "ENG_1": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ACQ_1"
+      ],
+      "details": "Write `02_clean_and_pivot.py`. Load `data/raw_usgs_streamflow.csv`. Pivot the data so 'Date' is the index, and there are two columns: 'Flow_Upstream' (site 01010000) and 'Flow_Downstream' (site 01014000). Convert flow to float, handle any missing values using linear interpolation. Save to `data/clean_pivoted_flow.csv`."
+    },
+    "ENG_2": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_1"
+      ],
+      "details": "Write `03_feature_engineering.py`. Load `data/clean_pivoted_flow.csv`. Create lagged features for the upstream gauge to simulate flow travel time: 'Upstream_Lag1', 'Upstream_Lag2', and 'Upstream_Lag3' (representing t-1, t-2, t-3 days). Drop rows with NaN values caused by lagging. Save the final ML-ready dataset to `data/ml_ready_features.csv`."
+    },
+    "INSP_1": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_2"
+      ],
+      "details": "Pause to allow the human to verify the ML-ready dataset.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "I have fetched the USGS data, cleaned it, and created lagged features. Please use the 'Inspect DataFrame' tool on `data/ml_ready_features.csv` to ensure the columns look correct before we begin training the Machine Learning model. Do you approve?"
+      },
+      "cyclic_routing": {
+        "condition": "Did the user approve the data?",
+        "if_true": [
+          "DEV_1"
+        ],
+        "if_false": [
+          "ENG_2"
+        ]
+      }
+    },
+    "DEV_1": {
+      "code": "DEV",
+      "category_name": "Model Development",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_1"
+      ],
+      "details": "Write `04_train_rf_model.py`. Load `data/ml_ready_features.csv`. Define features (X) as 'Flow_Upstream' and the 3 lag columns. Define target (y) as 'Flow_Downstream'. Split the data chronologically: first 80% for training, last 20% for testing. Initialize a RandomForestRegressor(n_estimators=100, random_state=42). Do not execute training yet, just structure the script to save the trained model using `joblib` or `pickle` to `outputs/rf_model.pkl`, and save the test predictions to `outputs/test_predictions.csv`."
+    },
+    "EXEC_1": {
+      "code": "EXEC",
+      "category_name": "Execution & Compute",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DEV_1"
+      ],
+      "details": "Execute `04_train_rf_model.py` to physically train the Random Forest on the dataset. Ensure the script completes and outputs `rf_model.pkl` and `test_predictions.csv`."
+    },
+    "EVAL_1": {
+      "code": "EVAL",
+      "category_name": "Evaluation & Output",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EXEC_1"
+      ],
+      "details": "Write `05_evaluate_model.py`. Load `outputs/test_predictions.csv` (which should contain 'Actual' and 'Predicted' columns). Calculate the Nash-Sutcliffe Efficiency (NSE) and Root Mean Squared Error (RMSE). Create a scatter plot of Predicted vs Actual flow, and a time-series hydrograph overlaying Actual and Predicted for the test period. Save plots to `outputs/hydrograph_eval.png` and metrics to `outputs/metrics.txt`. Print the NSE to the console."
+    },
+    "INSP_2": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EVAL_1"
+      ],
+      "details": "Evaluate the model's performance.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "The model training and evaluation are complete. Please look at `outputs/hydrograph_eval.png` and the printed NSE metric. Is the NSE > 0.60 and are the results acceptable?"
+      },
+      "cyclic_routing": {
+        "condition": "Did the user approve the model results (e.g., NSE is high enough)?",
+        "if_true": [
+          "DSGN_2"
+        ],
+        "if_false": [
+          "DEV_1"
+        ]
+      }
+    },
+    "DSGN_2": {
+      "code": "DSGN",
+      "category_name": "Methodological Design",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_2"
+      ],
+      "details": "Pipeline completed successfully. Write a final markdown report `outputs/Final_Report.md` summarizing the USGS API parameters, the lag features used, and the final Random Forest NSE and RMSE metrics."
+    }
+  }
+}

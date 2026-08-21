@@ -1,0 +1,187 @@
+{
+  "project": "High-Resolution Spatial Downscaling of ERA5 Climate Data over the Columbia River Basin (1980\u20132023)",
+  "workflow": {
+    "DSGN_1": {
+      "code": "DSGN",
+      "category_name": "Methodological Design",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Draft a design document `README_design.md` summarizing project objectives and phases: Phase 1 prototype (Jan 1980), Phase 2 methodology (kriging, reprojection, optional DEM lapse correction), Phase 3 full-scale pipeline (1980\u20132023). List required tools (cdsapi, xarray, rioxarray, geopandas, PyKrige, matplotlib), CRS EPSG:32611, workspace layout, and script naming conventions."
+    },
+    "ACQ_ERA5_Jan1980": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DSGN_1"
+      ],
+      "details": "Write `01_download_era5_jan1980.py`. Use the cdsapi Python library to download ERA5 hourly total precipitation (tp) and 2 m temperature (t2m) for 1\u201331 Jan 1980 over the Columbia River Basin bounding box. Save output to `data/era5_jan1980_hourly.nc`."
+    },
+    "ACQ_Basin_Boundary": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DSGN_1"
+      ],
+      "details": "Write `02_download_basin_boundary.py`. Use geopandas to fetch or download the Columbia River Basin geometry (GeoJSON) from a public source (e.g. HydroBASINS or USGS). Save to `data/columbia_basin.geojson`. If no public API, instruct user to supply the shapefile."
+    },
+    "ENG_Aggregate_Daily": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ACQ_ERA5_Jan1980"
+      ],
+      "details": "Write `03_aggregate_daily.py`. Load `data/era5_jan1980_hourly.nc` with xarray, aggregate hourly tp to daily sum and t2m to daily mean. Save daily outputs to `data/era5_jan1980_daily.nc`."
+    },
+    "ENG_Reproject_Prototype": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_Aggregate_Daily",
+        "ACQ_Basin_Boundary"
+      ],
+      "details": "Write `04_reproject_to_epsg32611.py`. Load `data/era5_jan1980_daily.nc` using rioxarray, reproject raster to EPSG:32611 and crop to basin extent. Load `data/columbia_basin.geojson` via geopandas, reproject to EPSG:32611. Save reprojected ERA5 to `data/era5_jan1980_daily_32611.nc` and boundary to `data/columbia_basin_32611.geojson`."
+    },
+    "INSP_Prototype_Data": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_Reproject_Prototype"
+      ],
+      "details": "Visualize the reprojected precipitation for Jan 1 1980 overlaid on the basin boundary to verify projection and clipping.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Review the map of Jan 1 1980 precipitation overlayed on the basin boundary. Is the projection and spatial clipping correct?"
+      },
+      "cyclic_routing": {
+        "condition": "User approved data projection and clipping?",
+        "if_true": [
+          "DEV_Kriging_Prototype"
+        ],
+        "if_false": [
+          "ENG_Reproject_Prototype"
+        ]
+      }
+    },
+    "DEV_Kriging_Prototype": {
+      "code": "DEV",
+      "category_name": "Model Development",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_Prototype_Data"
+      ],
+      "details": "Write `05_kriging_prototype.py`. Load `data/era5_jan1980_daily_32611.nc`. For Jan 1 1980 extract source grid point coordinates and tp/t2m values. Define a 1 km target grid covering the basin extent. Use PyKrige OrdinaryKriging with variogram model='spherical' to interpolate tp and t2m separately. Save interpolated rasters to `outputs/era5_19800101_pr_1km.nc` and `outputs/era5_19800101_t2m_1km.nc`."
+    },
+    "EVAL_Plot_Comparison_Prototype": {
+      "code": "EVAL",
+      "category_name": "Evaluation",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DEV_Kriging_Prototype"
+      ],
+      "details": "Write `06_plot_comparison.py`. Load original 31 km and kriged 1 km precipitation for 1980-01-01. Generate side-by-side maps with identical color scales and basin overlay; save to `figures/comparison_pr_19800101.png`. Repeat for temperature, save to `figures/comparison_t2m_19800101.png`."
+    },
+    "INSP_Plot_Comparison": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EVAL_Plot_Comparison_Prototype"
+      ],
+      "details": "Human inspects side-by-side comparison plots for 1980-01-01 to approve interpolation quality.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Do the kriging outputs look plausible compared to the original coarse grid? Approve to proceed to full pipeline."
+      },
+      "cyclic_routing": {
+        "condition": "User approved interpolation?",
+        "if_true": [
+          "DSGN_Full_Pipeline"
+        ],
+        "if_false": [
+          "DEV_Kriging_Prototype"
+        ]
+      }
+    },
+    "DSGN_Full_Pipeline": {
+      "code": "DSGN",
+      "category_name": "Methodological Design",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_Plot_Comparison"
+      ],
+      "details": "Draft `07_full_pipeline_design.md` listing modular scripts: `07_download_era5_full.py`, `08_aggregate_reproject_full.py`, `09_kriging_full.py`, `10_assemble_outputs.py`, plus README. Specify use of xarray with Dask chunking, multiprocessing for kriging, inputs, outputs, and CRS EPSG:32611."
+    },
+    "INSP_Full_Design": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DSGN_Full_Pipeline"
+      ],
+      "details": "Human reviews the full-scale pipeline design document and script list before coding.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Review the modular pipeline design and script list. Approve to generate code for full-scale processing."
+      },
+      "cyclic_routing": {
+        "condition": "User approved full pipeline design?",
+        "if_true": [
+          "ACQ_Era5_Full"
+        ],
+        "if_false": [
+          "DSGN_Full_Pipeline"
+        ]
+      }
+    },
+    "ACQ_Era5_Full": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_Full_Design"
+      ],
+      "details": "Write `07_download_era5_full.py`. Use cdsapi to loop over each month from Jan 1980 to Dec 2023, download ERA5 hourly tp and t2m for the basin bounding box. Save each to `data/era5_YYYY_MM_hourly.nc`."
+    },
+    "ENG_Aggregate_Reproject_Full": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ACQ_Era5_Full"
+      ],
+      "details": "Write `08_aggregate_reproject_full.py`. For each `data/era5_YYYY_MM_hourly.nc`, load with xarray using chunks={'time':24}, aggregate to daily sum/mean, reproject to EPSG:32611 with rioxarray, crop to basin. Save to `data/era5_YYYY_daily_32611.nc`."
+    },
+    "DEV_Kriging_Full": {
+      "code": "DEV",
+      "category_name": "Model Development",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_Aggregate_Reproject_Full"
+      ],
+      "details": "Write `09_kriging_full.py`. For each `data/era5_YYYY_daily_32611.nc`, loop daily, extract source points, perform OrdinaryKriging on a fixed 1 km target grid. Use multiprocessing (cpu_count()-1) to parallelize by day. Save each day to `outputs/era5_YYYYMMDD_pr_1km.nc` and `outputs/era5_YYYYMMDD_t2m_1km.nc`."
+    },
+    "EXEC_Assemble_Outputs": {
+      "code": "EXEC",
+      "category_name": "Execution",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DEV_Kriging_Full"
+      ],
+      "details": "Write `10_assemble_outputs.py`. Load all `outputs/era5_*_pr_1km.nc` with xarray, merge into `results/pr_1km_1980_2023.nc` with chunks={'time':365}. Repeat for temperature to `results/t2m_1km_1980_2023.nc`."
+    },
+    "EVAL_Final": {
+      "code": "EVAL",
+      "category_name": "Evaluation",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EXEC_Assemble_Outputs"
+      ],
+      "details": "Write `11_evaluate_output.py`. Load full-resolution NetCDFs, compute area-weighted mean daily tp and t2m time series. Plot selected time series for checkpoint locations. Save summary plot to `figures/summary_time_series.png`."
+    }
+  }
+}

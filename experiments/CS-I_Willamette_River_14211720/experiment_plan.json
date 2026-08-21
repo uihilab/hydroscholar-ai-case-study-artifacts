@@ -1,0 +1,122 @@
+{
+  "project": "Willamette_River_14211720_Correlation_2023",
+  "workflow": {
+    "DSGN_1": {
+      "code": "DSGN",
+      "category_name": "Methodological Design",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Outline analysis workflow: (1) Acquire daily precipitation and streamflow data for 2023; (2) Clean each dataset; (3) Merge on date; (4) Inspect merged data; (5) Define correlation analysis (Pearson & Spearman); (6) Compute metrics and generate scatter & time-series plots; (7) Inspect outputs."
+    },
+    "INFRA_1": {
+      "code": "INFRA",
+      "category_name": "Infrastructure",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Install required Python libraries: pandas, numpy, requests, matplotlib, scipy. Example: pip install pandas numpy requests matplotlib scipy"
+    },
+    "ACQ_Precip": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Write a Python script using requests to fetch daily precipitation (mm) for NOAA station USW00024233 via NOAA NCDC API from 2023-01-01 to 2023-12-31. Use NOAA_TOKEN environment variable. Save as data/raw_precip.csv."
+    },
+    "ACQ_Streamflow": {
+      "code": "ACQ",
+      "category_name": "Data Acquisition",
+      "status": "READY",
+      "prerequisites": [],
+      "details": "Write a Python script using requests to fetch daily mean streamflow (cfs) for USGS site 14211720 via USGS Water Services API from 2023-01-01 to 2023-12-31. Save as data/raw_streamflow.csv."
+    },
+    "ENG_Clean_Precip": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ACQ_Precip"
+      ],
+      "details": "Load data/raw_precip.csv with pandas. Parse 'date' column as datetime. Rename precipitation column to 'precip_mm'. Drop rows with missing values. Save cleaned data to data/clean_precip.csv."
+    },
+    "ENG_Clean_Streamflow": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ACQ_Streamflow"
+      ],
+      "details": "Load data/raw_streamflow.csv with pandas. Parse 'date' column as datetime. Rename discharge column to 'streamflow_cfs'. Drop rows with missing values. Save cleaned data to data/clean_streamflow.csv."
+    },
+    "ENG_Merge": {
+      "code": "ENG",
+      "category_name": "Data Engineering",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_Clean_Precip",
+        "ENG_Clean_Streamflow"
+      ],
+      "details": "Load data/clean_precip.csv and data/clean_streamflow.csv. Merge on 'date' using inner join. Save result as data/merged_hydro.csv."
+    },
+    "INSP_Merged_Data": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "ENG_Merge"
+      ],
+      "details": "Display head, summary statistics, date range, and missing\u2010value counts for data/merged_hydro.csv for human inspection.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Review the merged hydro dataset summary. Is the date range correct and are there no unexpected missing values or anomalies?"
+      },
+      "cyclic_routing": {
+        "condition": "Did the user approve the merged dataset?",
+        "if_true": [
+          "DEV_Calc_Corr"
+        ],
+        "if_false": [
+          "ACQ_Precip",
+          "ACQ_Streamflow"
+        ]
+      }
+    },
+    "DEV_Calc_Corr": {
+      "code": "DEV",
+      "category_name": "Model Development",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "INSP_Merged_Data"
+      ],
+      "details": "Define functions to calculate Pearson and Spearman correlation coefficients and p-values between 'precip_mm' and 'streamflow_cfs' using scipy.stats."
+    },
+    "EVAL_Plot_Corr": {
+      "code": "EVAL",
+      "category_name": "Evaluation",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "DEV_Calc_Corr"
+      ],
+      "details": "Write a Python script to load data/merged_hydro.csv; compute Pearson and Spearman correlations; save metrics to results/corr_metrics.json; generate scatter plot with regression line (plots/scatter.png) and dual-axis time series plot (plots/time_series.png)."
+    },
+    "INSP_Plot": {
+      "code": "INSP",
+      "category_name": "Manual Inspection",
+      "status": "BLOCKED",
+      "prerequisites": [
+        "EVAL_Plot_Corr"
+      ],
+      "details": "Human inspects the generated plots (plots/scatter.png, plots/time_series.png) and correlation metrics.",
+      "ui_instructions": {
+        "type": "human_review",
+        "prompt": "Do the plots and correlation results look correct?"
+      },
+      "cyclic_routing": {
+        "condition": "Did the user approve the plots and metrics?",
+        "if_true": [],
+        "if_false": [
+          "EVAL_Plot_Corr"
+        ]
+      }
+    }
+  }
+}
