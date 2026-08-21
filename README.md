@@ -4,7 +4,7 @@
   <img src="assets/tulane-logo.png" alt="Tulane University logo" width="180">
 </p>
 
-**Tulane University · [NEW LAB NAME TO BE CONFIRMED]**
+**the Hydroinformatics Lab at Tulane University**
 
 The USGS identifier is not bundled until written permission and approved artwork are confirmed. See the [USGS Visual Identity System guidance](https://www.usgs.gov/information-policies-and-instructions/usgs-visual-identity-system).
 
