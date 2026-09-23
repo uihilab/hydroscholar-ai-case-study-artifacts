@@ -2,26 +2,28 @@
   "case_studies": [
     {
       "name": "CS-I_Willamette_River_14211720",
-      "source": "C:\\Users\\Varun\\PhD-Materials\\Softwares\\hydroscholar-ai-advanced-v2-archive-files\\archive\\hydro_experiments\\20260222_230416_willamette_river_14211720_corr"
+      "source_archive_id": "20260222_230416_willamette_river_14211720_corr"
     },
     {
       "name": "CS-II_St_John_River_Random_Forest",
-      "source": "C:\\Users\\Varun\\PhD-Materials\\Softwares\\hydroscholar-ai-advanced-version-2-archive\\hydro_experiments\\20260223_154300_usgs_streamflow_ml_predictor_done"
+      "source_archive_id": "20260223_154300_usgs_streamflow_ml_predictor_done"
     },
     {
       "name": "CS-III_Lake_Oroville_Satellite_Monitoring",
-      "source": "C:\\Users\\Varun\\PhD-Materials\\Softwares\\hydroscholar-ai-advanced-version-2-archive\\hydro_experiments\\20260305_204400_reservoir_sentinel_monitoring_done"
+      "source_archive_id": "20260305_204400_reservoir_sentinel_monitoring_done"
     },
     {
       "name": "CS-IV_Onion_Creek_LSTM_Rainfall_Runoff",
-      "source": "C:\\Users\\Varun\\PhD-Materials\\Softwares\\hydroscholar-ai-advanced-version-2-archive\\hydro_experiments\\20260226_010616_onion_creek_flashiness_analysi_done"
+      "source_archive_id": "20260226_010616_onion_creek_flashiness_analysi_done"
     },
     {
       "name": "CS-V_ERA5_Columbia_River_Basin",
-      "source": "C:\\Users\\Varun\\PhD-Materials\\Softwares\\hydroscholar-ai-advanced-version-2-archive\\hydro_experiments\\20260306_090216_high_resolution_spatial_downsc_done"
+      "source_archive_id": "20260306_090216_high_resolution_spatial_downsc_done"
     }
   ],
   "case_study_count": 5,
+  "source_archive_identifier_note": "Original local filesystem paths are intentionally omitted from the public release.",
+  "manifest_hash_basis": "SHA-256 of the exact included file bytes in the release working tree; text files are normalized to LF by .gitattributes.",
   "max_file_size_bytes": 26214400,
   "excluded_directories": [
     ".mypy_cache",

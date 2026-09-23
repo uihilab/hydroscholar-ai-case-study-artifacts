@@ -1,0 +1,7 @@
+# Keep text-file bytes stable for MANIFEST.csv across checkouts and releases.
+* text=auto eol=lf
+
+# Preserve binary case-study artifacts byte-for-byte.
+*.png -text
+*.pdf -text
+*.geojson text eol=lf

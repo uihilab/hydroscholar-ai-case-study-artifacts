@@ -4,9 +4,9 @@ This folder is a case-study artifact archive. It contains selected experiment ou
 
 It does not contain the HydroScholar AI application source code. Large files, compiled files, credentials, and environment caches were intentionally excluded; see the repository-level manifest for their status.
 
-- Included files: 11
-- Included size: 2.30 MiB
-- Excluded files: 8
+- Included files: 10
+- Included size: 2.28 MiB
+- Excluded files: 9
 
 ## Exclusions from this folder
 
@@ -17,6 +17,7 @@ It does not contain the HydroScholar AI application source code. Large files, co
 04_evaluate_correlation.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
 experiment.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
 research_paper.aux: non-artifact file type
+research_paper.log: LaTeX compilation log omitted from public release because it contains local build paths
 research_paper.out: non-artifact file type
 research_paper.spl: HydroScholar source, executable, credential, cache, or large scientific-binary file
 ```
