@@ -4,4 +4,7 @@
 # Preserve binary case-study artifacts byte-for-byte.
 *.png -text
 *.pdf -text
+*.h5 -text
+*.pkl -text
+*.nc -text
 *.geojson text eol=lf

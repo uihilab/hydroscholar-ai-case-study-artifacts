@@ -1,4 +1,4 @@
-# This repository is artifact-only. Do not commit software environments or generated caches.
+# This repository is an artifact archive. Do not commit software environments, caches, or credentials.
 __pycache__/
 .pytest_cache/
 .venv/
@@ -10,11 +10,7 @@ node_modules/
 *.dll
 *.pem
 *.key
-*.nc
-*.nc4
-*.jp2
-*.tif
-*.tiff
-*.pt
-*.pth
-*.npy
+*.crt
+*.aux
+*.out
+*.spl

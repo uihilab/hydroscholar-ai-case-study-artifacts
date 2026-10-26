@@ -10,25 +10,26 @@
 
 The USGS identifier is included with permission using approved artwork. See the [USGS Visual Identity System guidance](https://www.usgs.gov/information-policies-and-instructions/usgs-visual-identity-system).
 
-This repository contains the five archived case-study evidence packages associated with the HydroScholar AI directed-graph workflow manuscript. It is an artifact archive, not the HydroScholar AI software repository and not a complete reproducibility package.
+This repository contains the five archived case-study evidence packages associated with the HydroScholar AI directed-graph workflow manuscript. It is an artifact archive, not the HydroScholar AI software repository.
 
 ## Scope
 
 The archive is intended to make the retained experiment record inspectable. It contains, where available:
 
-- experiment plans, prompts, designs, and configuration records;
-- timestamped provenance, execution logs, gate records, and recovery notes;
-- raw or processed tabular data products that are small enough for repository distribution;
+- experiment plans, prompts, designs, and configuration records (`experiment_plan.json`, `manifest.json`, `requirements.txt`);
+- timestamped provenance, execution logs, gate records, and recovery notes (`provenance.jsonl`, `global_audit_trace.jsonl`);
+- generated Python and shell task scripts produced during workflow execution (`.py`, `.sh`, with external API credentials redacted as `<REDACTED_CDS_API_KEY>`);
+- raw and processed tabular data products, serialized model architectures and weights (`.json`, `.weights.h5`, `.pkl`), and sub-25 MiB NetCDF spatial grids (`.nc`);
 - generated figures, plots, metrics, reports, and manuscript-ready outputs;
-- references to omitted execution scripts and other excluded files through the manifest.
+- references to excluded raw binary files exceeding 25 MiB and LaTeX build logs through `MANIFEST.csv`.
 
-The HydroScholar AI application source code, workflow-execution scripts, virtual environments, compiled binaries, credentials, caches, trained model weights, and large scientific-binary datasets are not included. Some folders retain manuscript-source files such as `research_paper.tex`; these are publication artifacts, not workflow-execution scripts.
+The HydroScholar AI application source code, virtual environments, compiled binaries, credentials, caches, and raw scientific-binary datasets exceeding 25 MiB are not included.
 
 ## Organization
 
 Each folder under `experiments/` corresponds to one of the five case studies in the manuscript. A non-sensitive timestamped source-archive identifier is recorded in `EXPERIMENT_INDEX.csv` so that each package can be reconciled with its originating provenance record without exposing local filesystem paths.
 
-- `experiments/<case-id>/` — selected case-study artifacts and a folder-level `ARCHIVE_README.md`;
+- `experiments/<case-id>/` — case-study artifacts and a folder-level `ARCHIVE_README.md`;
 - `CASE_EVIDENCE_MATRIX.md` — claim-focused map from each case to the retained plan, provenance, selected artifacts, observed behavior, and limitations;
 - `EXPERIMENT_INDEX.csv` — one row per manuscript case study, its non-sensitive source-archive identifier, and package counts;
 - `MANIFEST.csv` — file-level inclusion/exclusion status and checksums for included files;
@@ -36,7 +37,7 @@ Each folder under `experiments/` corresponds to one of the five case studies in 
 
 ## Important interpretation note
 
-These folders document workflow executions and their associated evidence. They should not automatically be interpreted as complete, independently validated hydrologic studies. Evidence completeness varies by case. The archive supports a case-specific audit of workflow plans, retained provenance, selected outputs, observed behavior, and limitations; it does not establish uniform end-to-end completion, independent replication, aggregate performance, comparative effectiveness, or hydrologic validity.
+These folders document workflow executions and their associated evidence. They should not automatically be interpreted as complete, independently validated hydrologic studies. Evidence completeness varies by case. The archive supports a case-specific audit of workflow plans, retained provenance, generated scripts, selected outputs, observed behavior, and limitations; it does not establish uniform end-to-end completion, independent replication, aggregate performance, comparative effectiveness, or hydrologic validity.
 
 ## Included case studies
 
@@ -50,7 +51,7 @@ No other experiment folders from the larger local archive are included.
 
 ## Software and data boundary
 
-This repository intentionally does not distribute the HydroScholar AI application source code or the case-specific execution scripts. The artifact folders are preserved for inspection of experiment evidence, not as a software release or a package that permits independent rerunning. Large datasets, model weights, and scientific-binary files excluded by the build are recorded in `MANIFEST.csv`; they should be deposited in an appropriate data repository if public redistribution is required.
+This repository intentionally does not distribute the HydroScholar AI application source code. The artifact folders preserve the case-specific generated task scripts, provenance logs, datasets, model artifacts, and sub-25 MiB spatial grids for inspection of experiment evidence. Raw binary datasets exceeding 25 MiB (specifically the 15 raw Sentinel-2 GeoTIFF band files `data/satellite/*.tif` in CS-III at 219–280 MiB each, and the three raw hourly ERA5 NetCDF archives `data/era5_2021_hourly.nc`, `data/era5_2022_hourly.nc`, and `data/era5_2023_hourly.nc` in CS-V at 26.9–28.5 MiB each) are excluded due to GitHub file-size limits and are recorded in `MANIFEST.csv`.
 
 ## Integrity and versioning
 

@@ -1,26 +1,18 @@
 # CS-I_Willamette_River_14211720
 
-This folder is a case-study artifact archive. It contains selected experiment outputs, provenance, data products, figures, and logs copied from the archived workflow bundle.
+This folder is a case-study artifact archive. It contains the experiment plan, provenance log, generated task scripts, tabular data products, model artifacts, sub-25 MiB NetCDF spatial grids, figures, and reports copied from the archived workflow workspace.
 
-It does not contain the HydroScholar AI application source code. Large files, compiled files, credentials, and environment caches were intentionally excluded; see the repository-level manifest for their status.
+It does not contain the HydroScholar AI application source code. Raw binary datasets larger than 25 MiB and LaTeX auxiliary build files were excluded; see `MANIFEST.csv` for their exact paths and sizes.
 
-- Included files: 13
-- Included size: 0.80 MiB
-- Excluded files: 12
+- Included files: 21
+- Included size: 0.81 MiB
+- Excluded files: 4
 
 ## Exclusions from this folder
 
 ```text
-experiment.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
-research_paper.aux: non-artifact file type
-research_paper.log: LaTeX compilation log omitted from public release because it contains local build paths
-research_paper.out: non-artifact file type
-research_paper.spl: HydroScholar source, executable, credential, cache, or large scientific-binary file
-scripts/calc_correlation.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
-scripts/clean_precip.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
-scripts/clean_streamflow.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
-scripts/fetch_precip.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
-scripts/fetch_streamflow.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
-scripts/merge_data.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
-scripts/plot_correlation.py: HydroScholar source, executable, credential, cache, or large scientific-binary file
+research_paper.aux (0.00 MiB): compiled bytecode, LaTeX build auxiliary, or credential file
+research_paper.log (0.02 MiB): LaTeX compilation log omitted from public release because it contains local build paths
+research_paper.out (0.00 MiB): compiled bytecode, LaTeX build auxiliary, or credential file
+research_paper.spl (0.00 MiB): compiled bytecode, LaTeX build auxiliary, or credential file
 ```
